@@ -1,8 +1,5 @@
 #!/bin/sh
 
-EAP_USERNAME="admin"
-EAP_PASSWORD="password1!"
-
 BPMS_USERNAME="bpmsAdmin"
 BPMS_PASSWORD="password1!"
 
@@ -12,10 +9,13 @@ PROJECT_DIR=./fsi-poc
 BRMS=jboss-brms-6.4.0.GA-deployable-eap7.x.zip
 EAP=jboss-eap-7.0.0-installer.jar
 EAP_PATCH=jboss-eap-7.0.3-patch.zip
+LOGIN_MODULE=CustomLoginModule.jar
+NEW_STANDALONE=standalone.xml
 BRMS_EAP_DIR=./target/brms
 SRC_DIR=./installs
 SUPPORT_DIR=./configs
 BASEDIR=$(dirname "$0")
+
 clear
 
 echo "Install BRMS 6.4 and EAP 7.0"
@@ -96,6 +96,13 @@ if [ $? -ne 0 ]; then
 	echo Error occurred during JBoss BRMS installation!
 	exit
 fi
+
+echo
+echo "Installing custom login module for EAP..."
+echo
+yes | \cp $SRC_DIR/$LOGIN_MODULE $JBOSS_HOME/standalone/deployments/business-central.war/WEB-INF/lib
+yes | \cp $SRC_DIR/$NEW_STANDALONE $JBOSS_HOME/standalone/configuration
+
 
 
 echo "==============================================="
