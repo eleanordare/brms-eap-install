@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 BPMS_USERNAME="bpmsAdmin"
 BPMS_PASSWORD="password1!"
