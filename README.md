@@ -1,4 +1,4 @@
-# bxms-eap-install
+# brms-eap-install
 
 ## Synopsis
 
