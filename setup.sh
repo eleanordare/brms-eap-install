@@ -8,7 +8,6 @@ NEW_ROLE="admin"
 
 JBOSS_HOME=./target/jboss-eap-7.0
 SERVER_BIN=$JBOSS_HOME/bin
-PROJECT_DIR=./fsi-poc
 BRMS=jboss-brms-6.4.0.GA-deployable-eap7.x.zip
 EAP=jboss-eap-7.0.0-installer.jar
 EAP_PATCH=jboss-eap-7.0.3-patch.zip
