@@ -1,23 +1,25 @@
 #!/bin/bash
 
+# Update with default admin user added to Business Central.
 BPMS_USERNAME="bpmsAdmin"
 BPMS_PASSWORD="password1!"
 
+# Update with roles to configure for BRMS.
 ROLE_TO_CHANGE="admin"
 NEW_ROLE="admin"
 
-JBOSS_HOME=./target/jboss-eap-7.0
-SERVER_BIN=$JBOSS_HOME/bin
 BRMS=jboss-brms-6.4.0.GA-deployable-eap7.x.zip
 EAP=jboss-eap-7.0.0-installer.jar
 EAP_PATCH=jboss-eap-7.0.3-patch.zip
 LOGIN_MODULE=CustomLoginModule.jar
 NEW_STANDALONE=standalone.xml
+
+JBOSS_HOME=./target/jboss-eap-7.0
+SERVER_BIN=$JBOSS_HOME/bin
 TRG_DIR=./target
 SRC_DIR=./installs
 SUPPORT_DIR=./configs
 BUSINESS_CENTRAL=$JBOSS_HOME/standalone/deployments/business-central.war
-BASEDIR=$(dirname "$0")
 
 clear
 
@@ -56,14 +58,16 @@ fi
 
 # Remove the old JBoss instance, if it exists.
 if [ -x $JBOSS_HOME ]; then
-	echo "  - existing JBoss product install detected and removed."
+	echo
+	echo "Existing JBoss product install detected and removed."
 	echo
 	rm -rf ./target
 fi
 
 
 # Run installers.
-echo "JBoss EAP installer running now."
+echo
+echo "JBoss EAP installer running now..."
 echo
 java -jar $SRC_DIR/$EAP $SUPPORT_DIR/eap-install.xml -variablefile $SUPPORT_DIR/eap-install.xml.variables
 
@@ -83,6 +87,7 @@ $JBOSS_HOME/bin/jboss-cli.sh --command="patch apply $SRC_DIR/$EAP_PATCH --overri
 if [ $? -ne 0 ]; then
 	echo
 	echo Error occurred during JBoss EAP patching.
+	echo
 fi
 
 echo
@@ -126,6 +131,6 @@ fi
 
 echo "==============================================="
 echo
-echo "BRMS 6.4 and EAP 7.0 are installed"
+echo "BRMS 6.4 and EAP 7.0 are installed."
 echo
 echo "==============================================="
