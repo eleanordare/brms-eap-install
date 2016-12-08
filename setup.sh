@@ -3,6 +3,9 @@
 BPMS_USERNAME="bpmsAdmin"
 BPMS_PASSWORD="password1!"
 
+ROLE_TO_CHANGE="admin"
+NEW_ROLE="admin"
+
 JBOSS_HOME=./target/jboss-eap-7.0
 SERVER_BIN=$JBOSS_HOME/bin
 PROJECT_DIR=./fsi-poc
@@ -11,9 +14,10 @@ EAP=jboss-eap-7.0.0-installer.jar
 EAP_PATCH=jboss-eap-7.0.3-patch.zip
 LOGIN_MODULE=CustomLoginModule.jar
 NEW_STANDALONE=standalone.xml
-BRMS_EAP_DIR=./target/brms
+TRG_DIR=./target
 SRC_DIR=./installs
 SUPPORT_DIR=./configs
+BUSINESS_CENTRAL=$JBOSS_HOME/standalone/deployments/business-central.war
 BASEDIR=$(dirname "$0")
 
 clear
@@ -83,13 +87,9 @@ fi
 echo
 echo "JBoss BRMS installer running now..."
 echo
-unzip $SRC_DIR/$BRMS -d $BRMS_EAP_DIR
-yes | \cp -rf $BRMS_EAP_DIR/jboss-eap-7.0/bin/* $JBOSS_HOME/bin
-yes | \cp -rf $BRMS_EAP_DIR/jboss-eap-7.0/standalone/configuration/* $JBOSS_HOME/standalone/configuration
-yes | \cp -rf $BRMS_EAP_DIR/jboss-eap-7.0/standalone/deployments/* $JBOSS_HOME/standalone/deployments
-rm -rf $BRMS_EAP_DIR
+unzip -o $SRC_DIR/$BRMS -d $TRG_DIR
 
-$JBOSS_HOME/bin/add-user.sh -a --user $BPMS_USERNAME --password $BPMS_PASSWORD --role kie-server,admin,rest-all,analyst
+$SERVER_BIN/add-user.sh -a --user $BPMS_USERNAME --password $BPMS_PASSWORD --role kie-server,admin,rest-all,analyst
 
 if [ $? -ne 0 ]; then
 	echo
@@ -100,9 +100,14 @@ fi
 echo
 echo "Installing custom login module for EAP..."
 echo
-yes | \cp $SRC_DIR/$LOGIN_MODULE $JBOSS_HOME/standalone/deployments/business-central.war/WEB-INF/lib
-yes | \cp $SRC_DIR/$NEW_STANDALONE $JBOSS_HOME/standalone/configuration
+cp -f $SRC_DIR/$LOGIN_MODULE $BUSINESS_CENTRAL/WEB-INF/lib
+cp -f $SRC_DIR/$NEW_STANDALONE $JBOSS_HOME/standalone/configuration
 
+echo
+echo "Configuring BRMS roles..."
+echo
+sed -i -E "s/roles(.*)$ROLE_TO_CHANGE/\rroles\1$NEW_ROLE/" $BUSINESS_CENTRAL/WEB-INF/classes/workbench-policy.properties
+sed -i -E "s/<role-name>$ROLE_TO_CHANGE/\<role-name>$NEW_ROLE/" $BUSINESS_CENTRAL/WEB-INF/web.xml
 
 
 echo "==============================================="
