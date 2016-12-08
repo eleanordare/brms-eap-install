@@ -1,4 +1,4 @@
-# bxms-eap-install
+# brms-eap-install
 
 ### Getting Started
 1. Download the broduct binaries from the [Red Hat Customer Portal](https://access.redhat.com) and copy them to the installs directory.
