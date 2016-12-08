@@ -54,12 +54,14 @@ else
 	exit
 fi
 
+
 # Remove the old JBoss instance, if it exists.
 if [ -x $JBOSS_HOME ]; then
 	echo "  - existing JBoss product install detected and removed."
 	echo
 	rm -rf ./target
 fi
+
 
 # Run installers.
 echo "JBoss EAP installer running now."
@@ -68,7 +70,7 @@ java -jar $SRC_DIR/$EAP $SUPPORT_DIR/eap-install.xml -variablefile $SUPPORT_DIR/
 
 if [ $? -ne 0 ]; then
 	echo
-	echo Error occurred during JBoss EAP installation!
+	echo Error occurred during JBoss EAP installation.
 	exit
 fi
 
@@ -81,33 +83,46 @@ $JBOSS_HOME/bin/jboss-cli.sh --command="patch apply $SRC_DIR/$EAP_PATCH --overri
 
 if [ $? -ne 0 ]; then
 	echo
-	echo Error occurred during JBoss EAP patching!
+	echo Error occurred during JBoss EAP patching.
 fi
 
 echo
 echo "JBoss BRMS installer running now..."
 echo
 unzip -o $SRC_DIR/$BRMS -d $TRG_DIR
-
 $SERVER_BIN/add-user.sh -a --user $BPMS_USERNAME --password $BPMS_PASSWORD --role kie-server,admin,rest-all,analyst
 
 if [ $? -ne 0 ]; then
 	echo
-	echo Error occurred during JBoss BRMS installation!
+	echo Error occurred during JBoss BRMS installation.
 	exit
 fi
 
+# Install additional custom login module from installs directory.
 echo
 echo "Installing custom login module for EAP..."
 echo
 cp -f $SRC_DIR/$LOGIN_MODULE $BUSINESS_CENTRAL/WEB-INF/lib
 cp -f $SRC_DIR/$NEW_STANDALONE $JBOSS_HOME/standalone/configuration
 
+if [ $? -ne 0 ]; then
+	echo
+	echo Error occurred during login module installation.
+	exit
+fi
+
+# Change BRMS role names from ROLE_TO_CHANGE to NEW_ROLE.
 echo
 echo "Configuring BRMS roles..."
 echo
 sed -i -E "s/roles(.*)$ROLE_TO_CHANGE/\rroles\1$NEW_ROLE/" $BUSINESS_CENTRAL/WEB-INF/classes/workbench-policy.properties
 sed -i -E "s/<role-name>$ROLE_TO_CHANGE/\<role-name>$NEW_ROLE/" $BUSINESS_CENTRAL/WEB-INF/web.xml
+
+if [ $? -ne 0 ]; then
+	echo
+	echo Error occurred during role configuration.
+	exit
+fi
 
 
 echo "==============================================="
