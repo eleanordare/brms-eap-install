@@ -5,9 +5,7 @@ JBOSS_HOME=./target/jboss-eap-7.0
 BRMS_PATCH=jboss-brms-6.4.x-patch.zip
 BRMS_PATCH_NAME=jboss-brms-6.4.x-patch
 
-TRG_DIR=./target
 SRC_DIR=./installs
-SUPPORT_DIR=./configs
 
 clear
 
