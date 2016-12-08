@@ -23,7 +23,7 @@ This repository provides bash scripts for installing BRMS 6.4 and EAP 7.0, with 
 
 The **apply_patch.sh** script is designed to install future updates to BRMS.
 
-##### Setup and installation:
+#### Setup and installation:
 1. Download the patch zip file from the [Red Hat Customer Portal](https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?product=brms&downloadType=patches&version=6.4) into the **installs** directory.
 2. Update the `JBOSS_HOME` variable to point to your jboss-eap-7.0 directory.
 3. Update the `BRMS_PATCH` and `BRMS_PATCH_NAME` variables with the same name as the patch zip file you downloaded into the **installs** directory.
