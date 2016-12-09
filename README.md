@@ -25,6 +25,9 @@ This repository provides bash scripts for installing BRMS 6.4 and EAP 7.0, with 
 5. Run `./setup.sh` in the root **brms-eap-install** directory.
 
 
+After the **setup.sh** script is completed, **jboss-eap-7.0** will be installed in the **targets** directory. To start up EAP in standalone mode, run `./target/jboss-eap-7.0/bin/standalone.sh`.
+
+
 ## Applying BRMS Patches
 
 The **apply_patch.sh** script is designed to install future updates to BRMS.
