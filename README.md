@@ -18,7 +18,7 @@ This repository provides bash scripts for installing BRMS 6.4 and EAP 7.0, with 
   - [Red Hat JBoss Enterprise Application Platform 7.0.3 Patch](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=47721)
 2. Change the `TRG_DIR` variable to your target directory. This is where EAP will be installed. (The default is currently a new **target** directory inside this repository.)
 3. Ensure that the `BRMS`, `EAP`, and `EAP_PATCH` variables in **setup.sh** are the same names as the files you just downloaded into **installs**.
-4. If you want to configure a default admin user for EAP, update the password in **configs/eap-install.xml.variables**.
+4. If you want to configure a default admin user for EAP, update the password in **configs/eap-install.xml.variables**. If you want to configure a default admin user for BRMS, update the username and password in **configs/brms.variables**.
 5. Make sure all dependencies are installed:
   - `yum install unzip` (to unzip EAP/BRMS patch files)
   - `yum install sed` (for BRMS role-configuration)
