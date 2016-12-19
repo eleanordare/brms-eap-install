@@ -1,5 +1,6 @@
 
-JBOSS_HOME=./target/jboss-eap-7.0
+TRG_DIR=./target
+JBOSS_HOME=$TRG_DIR/jboss-eap-7.0
 
 # Update this with patch file.
 BRMS_PATCH=jboss-brms-6.4.x-patch.zip

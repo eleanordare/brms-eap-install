@@ -16,16 +16,22 @@ This repository provides bash scripts for installing BRMS 6.4 and EAP 7.0, with 
   - [Red Hat JBoss BRMS 6.4.0 Deployable for EAP 7](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=48291)
   - [Red Hat JBoss Enterprise Application Platform 7.0.0 Installer](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=43881)
   - [Red Hat JBoss Enterprise Application Platform 7.0.3 Patch](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=47721)
-2. Ensure that the `BRMS`, `EAP`, and `EAP_PATCH` variables in **setup.sh** are the same names as the files you just downloaded into **installs**.
-3. If you want to configure a default admin user for EAP, update the password in **configs/eap-install.xml.variables**.
-4. Make sure all dependencies are installed:
+2. Change the `TRG_DIR` variable to your target directory. This is where EAP will be installed. (The default is currently the empty **target** directory in this repository.)
+3. Ensure that the `BRMS`, `EAP`, and `EAP_PATCH` variables in **setup.sh** are the same names as the files you just downloaded into **installs**.
+4. If you want to configure a default admin user for EAP, update the password in **configs/eap-install.xml.variables**.
+5. Make sure all dependencies are installed:
   - `yum install unzip` (to unzip EAP/BRMS patch files)
   - `yum install sed` (for BRMS role-configuration)
   - `yum install java` (to run EAP installer with configuration files)
-5. Run `./setup.sh` in the root **brms-eap-install** directory.
+6. Run `./setup.sh` in the root **brms-eap-install** directory.
 
 
-After the **setup.sh** script is completed, **jboss-eap-7.0** will be installed in the **targets** directory. To start up EAP in standalone mode, run `./target/jboss-eap-7.0/bin/standalone.sh`.
+After the **setup.sh** script is completed, **jboss-eap-7.0** will be installed in the target directory. To start up EAP in standalone mode, run `./jboss-eap-7.0/bin/standalone.sh`.
+
+
+## Applying EAP Patches
+
+The **setup.sh** script already includes the EAP 7.0.3 update. To install a newer patch, download your **jboss-eap-7.0.x-patch.zip** from the [Red Hat Customer Portal](https://access.redhat.com) into the **installs** directory, and change the `EAP_PATCH` variable to the name of that file.
 
 
 ## Applying BRMS Patches

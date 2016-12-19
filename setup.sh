@@ -14,9 +14,11 @@ EAP_PATCH=jboss-eap-7.0.3-patch.zip
 LOGIN_MODULE=CustomLoginModule.jar
 NEW_STANDALONE=standalone.xml
 
-JBOSS_HOME=./target/jboss-eap-7.0
-SERVER_BIN=$JBOSS_HOME/bin
+# Target directory for final EAP/BRMS installs.
 TRG_DIR=./target
+
+JBOSS_HOME=$TRG_DIR/jboss-eap-7.0
+SERVER_BIN=$JBOSS_HOME/bin
 SRC_DIR=./installs
 SUPPORT_DIR=./configs
 BUSINESS_CENTRAL=$JBOSS_HOME/standalone/deployments/business-central.war
@@ -56,15 +58,6 @@ else
 fi
 
 
-# Remove the old JBoss instance, if it exists.
-if [ -x $JBOSS_HOME ]; then
-	echo
-	echo "Existing JBoss product install detected and removed."
-	echo
-	rm -rf ./target
-fi
-
-
 # Run installers.
 echo
 echo "JBoss EAP installer running now..."
@@ -77,10 +70,8 @@ if [ $? -ne 0 ]; then
 	exit
 fi
 
-rm -f $JBOSS_HOME/modules/system/layers/base/org/jboss/as/web/main/lib/linux-x86_64/libapr-1.so
-
 echo
-echo "Applying JBoss EAP 7.0.3 patch now..."
+echo "Applying JBoss EAP 7.0.x patch now..."
 echo
 $JBOSS_HOME/bin/jboss-cli.sh --command="patch apply $SRC_DIR/$EAP_PATCH --override-all"
 
