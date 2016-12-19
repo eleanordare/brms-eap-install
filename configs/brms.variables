@@ -1,0 +1,3 @@
+# Update with default admin user added to Business Central.
+BRMS_USERNAME="bpmsAdmin"
+BRMS_PASSWORD="password1!"

@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Update with default admin user added to Business Central.
-BPMS_USERNAME="bpmsAdmin"
-BPMS_PASSWORD="password1!"
-
-# Update with roles to configure for BRMS.
-ROLE_TO_CHANGE="admin"
-NEW_ROLE="admin"
-
 BRMS=jboss-brms-6.4.0.GA-deployable-eap7.x.zip
 EAP=jboss-eap-7.0.0-installer.jar
 EAP_PATCH=jboss-eap-7.0.3-patch.zip
@@ -22,6 +14,13 @@ SERVER_BIN=$JBOSS_HOME/bin
 SRC_DIR=./installs
 SUPPORT_DIR=./configs
 BUSINESS_CENTRAL=$JBOSS_HOME/standalone/deployments/business-central.war
+
+# Pulls BRMS username/password variables from configs/brms.variables
+source $SUPPORT_DIR/brms.variables
+
+# Update with roles to configure for BRMS.
+ROLE_TO_CHANGE="admin"
+NEW_ROLE="admin"
 
 clear
 
@@ -85,7 +84,8 @@ echo
 echo "JBoss BRMS installer running now..."
 echo
 unzip -o $SRC_DIR/$BRMS -d $TRG_DIR
-$SERVER_BIN/add-user.sh -a --user $BPMS_USERNAME --password $BPMS_PASSWORD --role kie-server,admin,rest-all,analyst
+$SERVER_BIN/add-user.sh -a --user $BRMS_USERNAME --password $BRMS_PASSWORD --role kie-server,admin,rest-all,analyst
+
 
 if [ $? -ne 0 ]; then
 	echo
