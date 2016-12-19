@@ -16,7 +16,7 @@ This repository provides bash scripts for installing BRMS 6.4 and EAP 7.0, with 
   - [Red Hat JBoss BRMS 6.4.0 Deployable for EAP 7](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=48291)
   - [Red Hat JBoss Enterprise Application Platform 7.0.0 Installer](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=43881)
   - [Red Hat JBoss Enterprise Application Platform 7.0.3 Patch](https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=47721)
-2. Change the `TRG_DIR` variable to your target directory. This is where EAP will be installed. (The default is currently the empty **target** directory in this repository.)
+2. Change the `TRG_DIR` variable to your target directory. This is where EAP will be installed. (The default is currently a new **target** directory inside this repository.)
 3. Ensure that the `BRMS`, `EAP`, and `EAP_PATCH` variables in **setup.sh** are the same names as the files you just downloaded into **installs**.
 4. If you want to configure a default admin user for EAP, update the password in **configs/eap-install.xml.variables**.
 5. Make sure all dependencies are installed:
