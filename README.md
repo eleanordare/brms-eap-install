@@ -7,7 +7,7 @@ This repository provides bash scripts for installing BRMS 6.4 and EAP 7.0, with 
 #### Includes:
 - **setup.sh** retrieves files from **installs** directory, installs EAP 7.0.3 and BRMS 6.4.0 in **target** directory with custom login module included, and configures roles if variables `ROLE_TO_CHANGE` and `NEW_ROLE` are changed
 - **apply_patch.sh** is set up for future BRMS patches to be installed
-- **configs/** includes **eap-install.xml** and **eap-install.xml.variables** to configure EAP with an admin user on install
+- **configs/** includes **eap-install.xml** and **eap-install.xml.variables** to configure EAP with an admin user on install, and **brms.variables** to configure BRMS with an admin user on install
 - **installs/** is the destination for downloaded product binaries, also includes **CustomLoginModule.jar** and **standalone.xml** for installing login module
 
 

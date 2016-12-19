@@ -84,7 +84,7 @@ echo
 echo "JBoss BRMS installer running now..."
 echo
 unzip -o $SRC_DIR/$BRMS -d $TRG_DIR
-$SERVER_BIN/add-user.sh -a --user $BRMS_USERNAME --password $BRMS_PASSWORD --role kie-server,admin,rest-all,analyst
+$SERVER_BIN/add-user.sh -a --user $BRMS_USERNAME --password $BRMS_PASSWORD --role kie-server,admin,rest-all
 
 
 if [ $? -ne 0 ]; then
