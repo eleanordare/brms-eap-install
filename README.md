@@ -36,7 +36,7 @@ The **setup.sh** script already includes the EAP 7.0.3 update. To install a newe
 
 ## Applying BRMS Patches
 
-The **apply_patch.sh** script is designed to install future updates to BRMS.
+The **apply_patch.sh** script is designed to install future updates to BRMS. After the **setup.sh** script has been run, this must be run to update BRMS from 6.0 to 6.0.x.
 
 #### Setup and installation:
 1. Download the patch zip file from the [Red Hat Customer Portal](https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?product=brms&downloadType=patches&version=6.4) into the **installs** directory.
