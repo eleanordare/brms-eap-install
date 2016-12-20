@@ -31,7 +31,7 @@ After the **setup.sh** script is completed, **jboss-eap-7.0** will be installed 
 
 ## Applying EAP Patches
 
-The **setup.sh** script already includes the EAP 7.0.3 update. To install a newer patch, download your **jboss-eap-7.0.x-patch.zip** from the [Red Hat Customer Portal](https://access.redhat.com) and follow the [official instructions here](https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/version-7.0/patching-and-upgrading-guide/#zip-patching).
+The **setup.sh** script already includes the EAP 7.0.3 update. To install a newer patch after the initial install, download the latest patch from the [Red Hat Customer Portal](https://access.redhat.com) and follow the [official instructions here](https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/version-7.0/patching-and-upgrading-guide/#zip-patching).
 
 
 ## Applying BRMS Patches
